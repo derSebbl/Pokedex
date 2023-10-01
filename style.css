@@ -13,7 +13,7 @@ body {
     position: relative;
 }
 
-.card {
+.pokecard {
     display: flex;
     border: solid black;
     border-top-left-radius: 20px;
@@ -28,14 +28,14 @@ body {
     cursor: pointer;
 }
 
-.card img {
+.pokecard img {
     height: 150px;
     width: 150px;
 }
 
 .cardHead {
     display: flex;
-    gap: 50px;
+    gap: 30px;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
@@ -64,13 +64,7 @@ body {
     border: hidden;
     position: fixed;
     top: 25%;
-    background: linear-gradient(
-          to top,
-          pink 0%,
-          pink 50%,
-          paleturquoise 50%,
-          paleturquoise 100%
-        );
+    background: linear-gradient(to top,pink 0%,pink 50%,paleturquoise 50%,paleturquoise 100%);
 }
 
 #DetailCard img{
@@ -87,4 +81,28 @@ body {
 
 .d-none{
     display: none !important;
+}
+
+.Stats{
+    width: 250px;
+}
+
+.Speed, .HP, .Attack, .Defense{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.StatArt{
+    width: 110px;
+}
+
+.progress {
+    width: 200px;
+    display: flex;
+}
+
+.DName{
+    font-size: 24px;
+    font-weight: bold;
 }

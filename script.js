@@ -31,7 +31,7 @@ async function loadPokemon() {
 function renderPokedex(currentPokemon, i) {
   let container = document.getElementById("pokedex");
   let card = document.createElement("div");
-  card.className = "card";
+  card.className = "pokecard";
   card.setAttribute = ("data-url", currentPokemon.url); // damit die URL gespeichert wird um die richtigen Daten zu laden
   card.onclick = function () {
     OpenDetailCard(currentPokemon, i);
@@ -58,15 +58,35 @@ function AddHTMLDetail(currentPokemon, i) {
         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
         <div class="DName">${currentPokemon.name}</div>
         <div class="DetailType">type: ${currentPokemon.types["0"].type.name}</div>
-            <div>
-                <div class="Stats">${currentPokemon.stats["0"].stat.name}: ${currentPokemon.stats["0"].base_stat}</div>
-                <div class="Stats">${currentPokemon.stats["1"].stat.name}: ${currentPokemon.stats["1"].base_stat}</div>
-                <div class="Stats">${currentPokemon.stats["2"].stat.name}: ${currentPokemon.stats["2"].base_stat}</div>
-                <div class="Stats">${currentPokemon.stats["5"].stat.name}: ${currentPokemon.stats["5"].base_stat}</div>
+            <div class="Stats">
+                <div class="HP">
+                    <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
+                    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="${currentPokemon.stats["0"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+                    <div class="progress-bar bg-success" style="width: ${currentPokemon.stats["0"].base_stat}%">${currentPokemon.stats["0"].base_stat}</div>
+                    </div>
+                </div>
+                <div class="Attack">
+                    <div class="StatArt">${currentPokemon.stats["1"].stat.name}:</div>
+                    <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="${currentPokemon.stats["1"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+                    <div class="progress-bar bg-info text-dark" style="width: ${currentPokemon.stats["1"].base_stat}%">${currentPokemon.stats["1"].base_stat}</div>
+                    </div>
+                </div>
+                <div class="Defense">
+                    <div class="StatArt">${currentPokemon.stats["2"].stat.name}:</div>
+                    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="${currentPokemon.stats["2"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+                    <div class="progress-bar bg-warning text-dark" style="width: ${currentPokemon.stats["2"].base_stat}%">${currentPokemon.stats["2"].base_stat}</div>
+                    </div>
+                </div>
+                <div class="Speed">
+                    <div class="StatArt">${currentPokemon.stats["5"].stat.name}:</div>
+                    <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="${currentPokemon.stats["5"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+                    <div class="progress-bar bg-danger" style="width: ${currentPokemon.stats["5"].base_stat}%">${currentPokemon.stats["5"].base_stat}</div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <button onclick="addDNone()">x</button>
-            </div>
+                <div>
+                 <button type="button" class="btn btn-warning" onclick="addDNone()">x</button>
+                </div>
     </div>`;
     closeWindow();
 }
