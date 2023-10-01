@@ -52,12 +52,11 @@ body {
     align-items: center;
 }
 
-.DetailCard{
+#DetailCard{
     display: flex;
     justify-content: center;
     height: 500px;
     width: 400px;
-    background-color: white;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
@@ -65,9 +64,16 @@ body {
     border: hidden;
     position: fixed;
     top: 25%;
+    background: linear-gradient(
+          to top,
+          pink 0%,
+          pink 50%,
+          paleturquoise 50%,
+          paleturquoise 100%
+        );
 }
 
-.DetailCard img{
+#DetailCard img{
     height: 150px;
     width: 150px;
 }
