@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    max-width: 1920px;
+    max-width: 1920px !important;
     scroll-behavior: smooth;
     background-image: url(./img/jay-dkFJST9zZZo-unsplash.jpg);
     background-repeat: no-repeat;
@@ -121,9 +121,9 @@ body {
 
 .Bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-start;
     align-items: center;
-    margin: 20px;
+    margin-left: 10px;
 }
 
 #More {
@@ -136,7 +136,7 @@ body {
     border: solid black;
 }
 
-.Top img {
+#Top img {
     height: 60px;
     width: 60px;
     position: fixed;

@@ -50,6 +50,7 @@ function renderPokedex(currentPokemon, i) {
 function OpenDetailCard(currentPokemon, i) {
   removeDNone();
   AddHTMLDetail(currentPokemon, i);
+  BtnAddDnone();
 }
 
 function AddHTMLDetail(currentPokemon, i) {
@@ -100,17 +101,17 @@ function addDNone() {;
     let container = document.getElementById("pokeDetail");
     container.classList.add("d-none");
     container.innerHTML = ``;
+    BtnRemoveDnone();
 }
 
 function closeWindow(){
     document.getElementById("pokeDetail").addEventListener('mouseup',function(event)
     {
         let div = document.getElementById("DetailCard");
-        let stats = document.getElementsByClassName("Stats");
-        let btn = document.getElementsByClassName("DetailButtons");
         if(event.target != div && event.target.parentNode != div){
         addDNone();
         }})
+        BtnRemoveDnone();
 }
 
 function BackToTop(){
@@ -119,5 +120,13 @@ function BackToTop(){
 
 function DisableBtn(){
   document.getElementById("More").disabled = true;
-  setTimeout(function(){document.getElementById("More").disabled = false;},500);
+  setTimeout(function(){document.getElementById("More").disabled = false;},4000);
+}
+
+function BtnAddDnone(){
+  document.getElementById('Top').classList.add('d-none');
+}
+
+function BtnRemoveDnone(){
+  document.getElementById('Top').classList.remove('d-none');
 }
