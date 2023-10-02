@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    max-width: 1920px;
     scroll-behavior: smooth;
     background-image: url(./img/jay-dkFJST9zZZo-unsplash.jpg);
     background-repeat: no-repeat;
@@ -7,10 +8,17 @@ body {
     background-attachment: fixed;
 }
 
+.header{
+    display: flex;
+    justify-content: center;
+}
+
 #pokedex {
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    justify-content: center;
+    align-items: center;
 }
 
 .pokecard {
@@ -25,6 +33,10 @@ body {
     width: 200px;
     margin: 10px;
     background-color:rgba(255, 235, 205, 0.9);
+}
+
+.pokecard:hover {
+    background-color:rgba(255, 235, 170, 1);
     cursor: pointer;
 }
 
@@ -106,3 +118,30 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
+
+.Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+#More {
+    width: 150px;
+    height: 50px;
+    font-size: 24px;
+}
+
+#X {
+    border: solid black;
+}
+
+.Top img {
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+

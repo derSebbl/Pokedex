@@ -9,10 +9,13 @@
     <script src="./script.js"></script>
   </head>
   <body onload="AddPokemon()">
-    <h1 style="color: yellow;">Pokedex</h1>
+    <div class="header"><img src="./img/c3db453d3b7efcf423b71499faba0d95.png"></div>
     <div id="pokedex">
       <div id="pokeDetail" class="d-none"></div>
     </div>
-    <button onclick="loadMore()">More</button>
+    <div class="Bottom">
+    <button type="button" class="btn btn-warning" id="More" onclick="loadMore()">More</button>
+    <div class="Top" onclick="BackToTop()"><img src="./img/3Qfc6H-LogoMakr.png"></div>
+    </div>
   </body>
 </html>

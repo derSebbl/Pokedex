@@ -5,6 +5,7 @@ let currentLoad = 0;
 function loadMore() {
   load += 20;
   loadPokemon();
+  DisableBtn();
 }
 
 async function AddPokemon() {
@@ -85,7 +86,7 @@ function AddHTMLDetail(currentPokemon, i) {
                 </div>
             </div>
                 <div>
-                 <button type="button" class="btn btn-warning" onclick="addDNone()">x</button>
+                 <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
                 </div>
     </div>`;
     closeWindow();
@@ -110,4 +111,13 @@ function closeWindow(){
         if(event.target != div && event.target.parentNode != div){
         addDNone();
         }})
+}
+
+function BackToTop(){
+  document.documentElement.scrollTop = 0;
+}
+
+function DisableBtn(){
+  document.getElementById("More").disabled = true;
+  setTimeout(function(){document.getElementById("More").disabled = false;},500);
 }
