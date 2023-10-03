@@ -93,8 +93,8 @@ body {
 }
 
 .DetailType{ 
-    border: solid black;
-    border-radius: 10px;
+    border: solid 2px black;
+    border-radius: 20px;
     background-color: beige;
     padding: 5px;
 }
@@ -128,7 +128,7 @@ body {
 }
 
 .DName{
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -145,6 +145,10 @@ body {
     font-size: 24px;
 }
 
+#More:hover {
+    scale: 1.1;
+}
+
 #DetailBtn {
     display: flex;
     width: 100%;
@@ -157,7 +161,7 @@ body {
     background-color: red;
     font-weight: bold;
     margin-right: 20px;
-    margin-left: 70px;
+    margin-left: 80px;
 }
 
 #back, #next {
@@ -176,5 +180,9 @@ body {
     width: 60px;
     cursor: pointer;
     margin-left: 80px;
+}
+
+#Top img:hover {
+    scale: 1.1;
 }
 

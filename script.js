@@ -199,3 +199,7 @@ async function nextPokemon(){
     OpenDetailCard(NextPokemon, currentIndex)
   }
   }
+
+  function SearchPokemon(){
+    
+  }
