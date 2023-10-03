@@ -1,6 +1,9 @@
 let AllPokemons = [];
+
 let load = 20;
+
 let currentLoad = 0;
+
 const typeColors = {
   normal: "#929DA3",
   poison: "#AA6BC8",
@@ -22,6 +25,8 @@ const typeColors = {
   fairy: "#EC8FE6",
   default: "#E6D8BC",
 };
+
+let currentIndex = 0;
 
 function loadMore() {
   load += 20;
@@ -69,6 +74,7 @@ function renderPokedex(currentPokemon, i) {
 }
 
 function OpenDetailCard(currentPokemon, i) {
+  currentIndex = i;
   removeDNone();
   AddHTMLDetail(currentPokemon, i);
   BtnAddDnone();
@@ -80,13 +86,15 @@ function AddHTMLDetail(currentPokemon, i) {
   let backgroundColor = setTypeBackground(type);
   container.innerHTML += /*html*/`
       <div id="DetailCard"  style="background-color: ${backgroundColor};">
-          <div class="DetailBtn">
+          <div id="DetailBtn">
+           <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
+           <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
            <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
           </div>
         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
         <div class="DName">${currentPokemon.name}</div>
         <div class="DetailType">type: ${type}</div>
-            <div class="Stats">
+            <div id="Stats">
                 <div class="HP">
                     <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
                     <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="${currentPokemon.stats["0"].base_stat}" aria-valuemin="0" aria-valuemax="200">
@@ -113,7 +121,7 @@ function AddHTMLDetail(currentPokemon, i) {
                 </div>
             </div>
     </div>`;
-  closeWindow();
+    closeWindow();
 }
 
 function removeDNone() {
@@ -131,8 +139,8 @@ function closeWindow() {
   document
     .getElementById("pokeDetail")
     .addEventListener("mouseup", function (event) {
-      let div = document.getElementById("DetailCard");
-      if (event.target != div && event.target.parentNode != div) {
+      let div = document.getElementById('pokeDetail');
+      if (event.target == div) {
         addDNone();
       }
     });
@@ -161,3 +169,33 @@ function BtnRemoveDnone() {
 function setTypeBackground(typeName) {
   return typeColors[typeName] || typeColors.default;
 }
+
+async function nextPokemon(){
+  if(currentIndex >= AllPokemons.length){
+    addDNone();
+  }
+  if(currentIndex >= currentLoad){
+    await loadMore();
+    nextPokemon();
+  }
+  else{
+    currentIndex++;
+    let NextPokemonUrl = AllPokemons[currentIndex].url;
+    let pokemon= await fetch(NextPokemonUrl);
+    let NextPokemon = await pokemon.json();
+    OpenDetailCard(NextPokemon, currentIndex)
+  }
+  }
+
+  async function backPokemon(){
+    if(currentIndex <= 0){
+      addDNone();
+    }
+    else{
+    currentIndex--;
+    let NextPokemonUrl = AllPokemons[currentIndex].url;
+    let pokemon= await fetch(NextPokemonUrl);
+    let NextPokemon = await pokemon.json();
+    OpenDetailCard(NextPokemon, currentIndex)
+  }
+  }

@@ -103,7 +103,7 @@ body {
     display: none !important;
 }
 
-.Stats{
+#Stats{
     width: 250px;
 }
 
@@ -111,16 +111,20 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    height: 28px;
 }
 
 .StatArt{
     width: 110px;
+    font-size: 20px;
 }
 
 .progress {
     width: 200px;
     display: flex;
     border: solid 2px black;
+    font-weight: bold;
+    height: 20px !important;
 }
 
 .DName{
@@ -141,10 +145,11 @@ body {
     font-size: 24px;
 }
 
-.DetailBtn {
+#DetailBtn {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    margin-bottom: 20px;
 }
 
 #X {
@@ -152,6 +157,18 @@ body {
     background-color: red;
     font-weight: bold;
     margin-right: 20px;
+    margin-left: 70px;
+}
+
+#back, #next {
+    border: solid 2px black;
+    background-color: yellow;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+#X:hover {
+    background-color: rgba(180, 0, 0, 1 );
 }
 
 #Top img {
