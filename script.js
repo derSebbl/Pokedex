@@ -1,6 +1,27 @@
 let AllPokemons = [];
 let load = 20;
 let currentLoad = 0;
+const typeColors = {
+  normal: "#929DA3",
+  poison: "#AA6BC8",
+  bug: "#91C12F",
+  fire: "#FF9D55",
+  electric: "#F4D23C",
+  dragon: "#0B6DC3",
+  fighting: "#CE416B",
+  ground: "#D97845",
+  ghost: "#5269AD",
+  water: "#5090D6",
+  psychic: "#FA7179",
+  dark: "#5A5465",
+  flying: "#8FA9DE",
+  rock: "#C5B78C",
+  steel: "#5A8EA2",
+  grass: "#63BC5A",
+  ice: "#73CEC0",
+  fairy: "#EC8FE6",
+  default: "#E6D8BC",
+};
 
 function loadMore() {
   load += 20;
@@ -36,7 +57,7 @@ function renderPokedex(currentPokemon, i) {
   card.setAttribute = ("data-url", currentPokemon.url); // damit die URL gespeichert wird um die richtigen Daten zu laden
   card.onclick = function () {
     OpenDetailCard(currentPokemon, i);
-  }; 
+  };
   card.innerHTML = `<div class="cardHead">
     <div class="pokeName">${currentPokemon.name}</div>
     <div class="pokeId">${"#" + currentPokemon.id}</div>
@@ -55,11 +76,16 @@ function OpenDetailCard(currentPokemon, i) {
 
 function AddHTMLDetail(currentPokemon, i) {
   let container = document.getElementById("pokeDetail");
-  container.innerHTML += /*html*/ `
-    <div id="DetailCard">
+  let type = currentPokemon.types["0"].type.name;
+  let backgroundColor = setTypeBackground(type);
+  container.innerHTML += /*html*/`
+      <div id="DetailCard"  style="background-color: ${backgroundColor};">
+          <div class="DetailBtn">
+           <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
+          </div>
         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
         <div class="DName">${currentPokemon.name}</div>
-        <div class="DetailType">type: ${currentPokemon.types["0"].type.name}</div>
+        <div class="DetailType">type: ${type}</div>
             <div class="Stats">
                 <div class="HP">
                     <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
@@ -86,47 +112,52 @@ function AddHTMLDetail(currentPokemon, i) {
                     </div>
                 </div>
             </div>
-                <div>
-                 <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
-                </div>
     </div>`;
-    closeWindow();
+  closeWindow();
 }
 
 function removeDNone() {
   document.getElementById("pokeDetail").classList.remove("d-none");
 }
 
-function addDNone() {;
-    let container = document.getElementById("pokeDetail");
-    container.classList.add("d-none");
-    container.innerHTML = ``;
-    BtnRemoveDnone();
+function addDNone() {
+  let container = document.getElementById("pokeDetail");
+  container.classList.add("d-none");
+  container.innerHTML = ``;
+  BtnRemoveDnone();
 }
 
-function closeWindow(){
-    document.getElementById("pokeDetail").addEventListener('mouseup',function(event)
-    {
-        let div = document.getElementById("DetailCard");
-        if(event.target != div && event.target.parentNode != div){
+function closeWindow() {
+  document
+    .getElementById("pokeDetail")
+    .addEventListener("mouseup", function (event) {
+      let div = document.getElementById("DetailCard");
+      if (event.target != div && event.target.parentNode != div) {
         addDNone();
-        }})
-        BtnRemoveDnone();
+      }
+    });
+  BtnRemoveDnone();
 }
 
-function BackToTop(){
+function BackToTop() {
   document.documentElement.scrollTop = 0;
 }
 
-function DisableBtn(){
+function DisableBtn() {
   document.getElementById("More").disabled = true;
-  setTimeout(function(){document.getElementById("More").disabled = false;},4000);
+  setTimeout(function () {
+    document.getElementById("More").disabled = false;
+  }, 4000);
 }
 
-function BtnAddDnone(){
-  document.getElementById('Top').classList.add('d-none');
+function BtnAddDnone() {
+  document.getElementById("Top").classList.add("d-none");
 }
 
-function BtnRemoveDnone(){
-  document.getElementById('Top').classList.remove('d-none');
+function BtnRemoveDnone() {
+  document.getElementById("Top").classList.remove("d-none");
+}
+
+function setTypeBackground(typeName) {
+  return typeColors[typeName] || typeColors.default;
 }

@@ -1,11 +1,20 @@
+
 body {
     margin: 0;
-    max-width: 1920px !important;
     scroll-behavior: smooth;
     background-image: url(./img/jay-dkFJST9zZZo-unsplash.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+.main-container{
+    display: flex;
+    justify-content: center;
+    max-width: 1920px;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
 .header{
@@ -76,7 +85,6 @@ body {
     border: hidden;
     position: fixed;
     top: 25%;
-    background: linear-gradient(to top,pink 0%,pink 50%,paleturquoise 50%,paleturquoise 100%);
 }
 
 #DetailCard img{
@@ -112,6 +120,7 @@ body {
 .progress {
     width: 200px;
     display: flex;
+    border: solid 2px black;
 }
 
 .DName{
@@ -123,7 +132,7 @@ body {
     display: flex;
     justify-content:flex-start;
     align-items: center;
-    margin-left: 10px;
+    margin: 20px;
 }
 
 #More {
@@ -132,16 +141,23 @@ body {
     font-size: 24px;
 }
 
+.DetailBtn {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 #X {
-    border: solid black;
+    border: solid 2px black;
+    background-color: red;
+    font-weight: bold;
+    margin-right: 20px;
 }
 
 #Top img {
     height: 60px;
     width: 60px;
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
     cursor: pointer;
+    margin-left: 80px;
 }
 
