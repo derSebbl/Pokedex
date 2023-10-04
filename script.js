@@ -1,9 +1,6 @@
 let AllPokemons = [];
-
 let load = 20;
-
 let currentLoad = 0;
-
 const typeColors = {
   normal: "#929DA3",
   poison: "#AA6BC8",
@@ -77,6 +74,7 @@ function OpenDetailCard(currentPokemon, i) {
   currentIndex = i;
   removeDNone();
   AddHTMLDetail(currentPokemon, i);
+  showStats(currentPokemon);
   BtnAddDnone();
 }
 
@@ -85,7 +83,7 @@ function AddHTMLDetail(currentPokemon, i) {
   let type = currentPokemon.types["0"].type.name;
   let backgroundColor = setTypeBackground(type);
   container.innerHTML += /*html*/`
-      <div id="DetailCard"  style="background-color: ${backgroundColor};">
+      <div id="DetailCard" style="background-color: ${backgroundColor};">
           <div id="DetailBtn">
            <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
            <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
@@ -94,32 +92,12 @@ function AddHTMLDetail(currentPokemon, i) {
         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
         <div class="DName">${currentPokemon.name}</div>
         <div class="DetailType">type: ${type}</div>
-            <div id="Stats">
-                <div class="HP">
-                    <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
-                    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="${currentPokemon.stats["0"].base_stat}" aria-valuemin="0" aria-valuemax="200">
-                    <div class="progress-bar bg-success" style="width: ${currentPokemon.stats["0"].base_stat}%">${currentPokemon.stats["0"].base_stat}</div>
-                    </div>
-                </div>
-                <div class="Attack">
-                    <div class="StatArt">${currentPokemon.stats["1"].stat.name}:</div>
-                    <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="${currentPokemon.stats["1"].base_stat}" aria-valuemin="0" aria-valuemax="200">
-                    <div class="progress-bar bg-info text-dark" style="width: ${currentPokemon.stats["1"].base_stat}%">${currentPokemon.stats["1"].base_stat}</div>
-                    </div>
-                </div>
-                <div class="Defense">
-                    <div class="StatArt">${currentPokemon.stats["2"].stat.name}:</div>
-                    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="${currentPokemon.stats["2"].base_stat}" aria-valuemin="0" aria-valuemax="200">
-                    <div class="progress-bar bg-warning text-dark" style="width: ${currentPokemon.stats["2"].base_stat}%">${currentPokemon.stats["2"].base_stat}</div>
-                    </div>
-                </div>
-                <div class="Speed">
-                    <div class="StatArt">${currentPokemon.stats["5"].stat.name}:</div>
-                    <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="${currentPokemon.stats["5"].base_stat}" aria-valuemin="0" aria-valuemax="200">
-                    <div class="progress-bar bg-danger" style="width: ${currentPokemon.stats["5"].base_stat}%">${currentPokemon.stats["5"].base_stat}</div>
-                    </div>
-                </div>
-            </div>
+        <div id="InfoBtn">
+          <button onclick="showStats()">Stats</button>
+          <button onclick="showMoves()">Moves</button>
+          <button onclick="showBody()">Measurements</button>
+        </div>
+        <div id="Result"></div>
     </div>`;
     closeWindow();
 }
@@ -136,9 +114,7 @@ function addDNone() {
 }
 
 function closeWindow() {
-  document
-    .getElementById("pokeDetail")
-    .addEventListener("mouseup", function (event) {
+  document.getElementById("pokeDetail").addEventListener("mouseup", function (event) {
       let div = document.getElementById('pokeDetail');
       if (event.target == div) {
         addDNone();
@@ -183,11 +159,13 @@ async function nextPokemon(){
     let NextPokemonUrl = AllPokemons[currentIndex].url;
     let pokemon= await fetch(NextPokemonUrl);
     let NextPokemon = await pokemon.json();
+    document.getElementById('DetailCard').remove();
     OpenDetailCard(NextPokemon, currentIndex)
   }
   }
 
   async function backPokemon(){
+    document.getElementById('DetailCard').remove();
     if(currentIndex <= 0){
       addDNone();
     }
@@ -202,4 +180,82 @@ async function nextPokemon(){
 
   function SearchPokemon(){
     
+  }
+
+   async function showStats(){
+    let NextPokemonUrl = AllPokemons[currentIndex].url;
+    let pokemon= await fetch(NextPokemonUrl);
+    let currentPokemon = await pokemon.json();
+    let statcontainer = document.getElementById('Result');
+    statcontainer.innerHTML = ``;
+    statcontainer.innerHTML = `
+    <div class="HP">
+    <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
+    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="${currentPokemon.stats["0"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+    <div class="progress-bar bg-success" style="width: ${currentPokemon.stats["0"].base_stat}%">${currentPokemon.stats["0"].base_stat}</div>
+    </div>
+</div>
+<div class="Attack">
+    <div class="StatArt">${currentPokemon.stats["1"].stat.name}:</div>
+    <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="${currentPokemon.stats["1"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+    <div class="progress-bar bg-info text-dark" style="width: ${currentPokemon.stats["1"].base_stat}%">${currentPokemon.stats["1"].base_stat}</div>
+    </div>
+</div>
+<div class="Defense">
+    <div class="StatArt">${currentPokemon.stats["2"].stat.name}:</div>
+    <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="${currentPokemon.stats["2"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+    <div class="progress-bar bg-warning text-dark" style="width: ${currentPokemon.stats["2"].base_stat}%">${currentPokemon.stats["2"].base_stat}</div>
+    </div>
+</div>
+<div class="Speed">
+    <div class="StatArt">${currentPokemon.stats["5"].stat.name}:</div>
+    <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="${currentPokemon.stats["5"].base_stat}" aria-valuemin="0" aria-valuemax="200">
+    <div class="progress-bar bg-danger" style="width: ${currentPokemon.stats["5"].base_stat}%">${currentPokemon.stats["5"].base_stat}</div>
+    </div>
+</div>
+    `;
+  }
+
+  async function showMoves(){
+    let NextPokemonUrl = AllPokemons[currentIndex].url;
+    let pokemon= await fetch(NextPokemonUrl);
+    let currentPokemon = await pokemon.json();
+    let statcontainer = document.getElementById('Result');
+    statcontainer.innerHTML = ``;
+    statcontainer.innerHTML =`
+    <div class="moves">
+    <div>
+    <div class="move">1. ${currentPokemon.moves["0"].move.name}</div>
+    <div class="move">3. ${currentPokemon.moves["2"].move.name}</div>
+    <div class="move">5. ${currentPokemon.moves["4"].move.name}</div>
+    <div class="move">7. ${currentPokemon.moves["6"].move.name}</div>
+    </div>
+    <br>
+    <div>
+    <div class="move">2. ${currentPokemon.moves["1"].move.name}</div>
+    <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
+    <div class="move">6. ${currentPokemon.moves["5"].move.name}</div>
+    <div class="move">8. ${currentPokemon.moves["7"].move.name}</div>
+    </div>
+    </div>`;
+  };
+
+ async function showBody(){
+    let NextPokemonUrl = AllPokemons[currentIndex].url;
+    let pokemon= await fetch(NextPokemonUrl);
+    let currentPokemon = await pokemon.json();
+    let statcontainer = document.getElementById('Result');
+    let height = currentPokemon.height / 10;
+    let weight = currentPokemon.weight / 10;
+    statcontainer.innerHTML = ``;
+    statcontainer.innerHTML =`
+    <div class="measur">
+      <div class="height">
+        <div>Height:</div><div>${height} m</div>
+      </div>
+      <div class="weight">
+        <div>Weight:</div><div>${weight} kg</div>
+      </div>
+    </div>
+   `; 
   }

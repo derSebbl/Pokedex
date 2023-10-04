@@ -76,7 +76,7 @@ body {
 #DetailCard{
     display: flex;
     justify-content: center;
-    height: 500px;
+    height: 600px;
     width: 400px;
     justify-content: space-evenly;
     align-items: center;
@@ -84,7 +84,7 @@ body {
     border-radius: 20px;
     border: hidden;
     position: fixed;
-    top: 25%;
+    top: 15%;
 }
 
 #DetailCard img{
@@ -103,13 +103,15 @@ body {
     display: none !important;
 }
 
-#Stats{
-    width: 250px;
+#Result{
+    width: 400px;
+    height: 112px;;
 }
 
 .Speed, .HP, .Attack, .Defense{
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     height: 28px;
 }
@@ -128,7 +130,7 @@ body {
 }
 
 .DName{
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
 }
 
@@ -184,5 +186,41 @@ body {
 
 #Top img:hover {
     scale: 1.1;
+}
+
+#InfoBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.moves {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.move {
+    border: solid 2px black;
+    border-radius: 5px;
+    padding: 2px;
+    gap: 2px;
+}
+
+.measur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: bold; 
+}
+
+.height, .weight {
+    display: flex;
+    gap: 20px;
 }
 
