@@ -4,8 +4,14 @@ body {
     scroll-behavior: smooth;
     background-image: url(./img/jay-dkFJST9zZZo-unsplash.jpg);
     background-repeat: no-repeat;
+    background-position: center center;
     background-size: cover;
     background-attachment: fixed;
+}
+
+span:hover {
+    cursor: pointer;
+    border-bottom: solid 3px blue;
 }
 
 .main-container{
@@ -84,7 +90,7 @@ body {
     border-radius: 20px;
     border: hidden;
     position: fixed;
-    top: 15%;
+    top: 10%;
 }
 
 #DetailCard img{
@@ -185,29 +191,31 @@ body {
 }
 
 #Top img:hover {
-    scale: 1.1;
+    scale: 1.2;
 }
 
-#InfoBtn {
+#InfoContainer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    height: 30px;
     gap: 10px;
+    width: 300px;
+    font-weight: bold;
 }
 
 .moves {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     font-size: 16px;
     font-weight: bold;
 }
 
 .move {
-    border: solid 2px black;
+    border-bottom: solid 1px black;
     border-radius: 5px;
-    padding: 2px;
-    gap: 2px;
+    margin-top: 15px;
 }
 
 .measur {
@@ -224,3 +232,24 @@ body {
     gap: 20px;
 }
 
+@media (max-width: 500px){
+    #DetailCard, #Result{
+        width: 300px;
+    }
+
+    .progress{
+        width: 150px;
+    }
+
+    #X{
+        margin-left: 50px;
+    }
+
+    #DetailCard{
+        top: 5%;
+    }
+
+    .header img{
+        width: 300px;
+    }
+}

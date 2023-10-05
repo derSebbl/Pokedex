@@ -92,10 +92,10 @@ function AddHTMLDetail(currentPokemon, i) {
         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
         <div class="DName">${currentPokemon.name}</div>
         <div class="DetailType">type: ${type}</div>
-        <div id="InfoBtn">
-          <button onclick="showStats()">Stats</button>
-          <button onclick="showMoves()">Moves</button>
-          <button onclick="showBody()">Measurements</button>
+        <div id="InfoContainer">
+          <div><span onclick="showStats()">Stats</span></div>
+          <div><span onclick="showMoves()">Moves</span></div>
+          <div><span onclick="showBody()">Measurements</span></div>
         </div>
         <div id="Result"></div>
     </div>`;
@@ -227,15 +227,11 @@ async function nextPokemon(){
     <div>
     <div class="move">1. ${currentPokemon.moves["0"].move.name}</div>
     <div class="move">3. ${currentPokemon.moves["2"].move.name}</div>
-    <div class="move">5. ${currentPokemon.moves["4"].move.name}</div>
-    <div class="move">7. ${currentPokemon.moves["6"].move.name}</div>
     </div>
     <br>
     <div>
     <div class="move">2. ${currentPokemon.moves["1"].move.name}</div>
     <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
-    <div class="move">6. ${currentPokemon.moves["5"].move.name}</div>
-    <div class="move">8. ${currentPokemon.moves["7"].move.name}</div>
     </div>
     </div>`;
   };
@@ -259,3 +255,5 @@ async function nextPokemon(){
     </div>
    `; 
   }
+
+
