@@ -1,6 +1,9 @@
 let AllPokemons = [];
+
 let load = 20;
+
 let currentLoad = 0;
+
 const typeColors = {
   normal: "#929DA3",
   poison: "#AA6BC8",
@@ -56,7 +59,7 @@ function renderPokedex(currentPokemon, i) {
   let container = document.getElementById("pokedex");
   let card = document.createElement("div");
   card.className = "pokecard";
-  card.setAttribute = ("data-url", currentPokemon.url); // damit die URL gespeichert wird um die richtigen Daten zu laden
+  card.setAttribute = ("data-url", currentPokemon.url);
   card.onclick = function () {
     OpenDetailCard(currentPokemon, i);
   };
@@ -82,20 +85,18 @@ function AddHTMLDetail(currentPokemon, i) {
   let container = document.getElementById("pokeDetail");
   let type = currentPokemon.types["0"].type.name;
   let backgroundColor = setTypeBackground(type);
-  container.innerHTML += /*html*/`
-      <div id="DetailCard" style="background-color: ${backgroundColor};">
-          <div id="DetailBtn">
-           
-           
-           <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
-          </div>
-          <div>
-            <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
-         </div>
-         <div class="btnimg">
-           <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
+  container.innerHTML += /*html*/ `
+    <div id="DetailCard" style="background-color: ${backgroundColor};">
+        <div id="DetailBtn">
+          <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
+        </div>
+        <div>
+         <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
+       </div>
+       <div class="btnimg">
+          <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
           <div class="DName">${currentPokemon.name}</div>
-        <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
+          <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
         </div>
         <div class="DetailType">type: ${type}</div>
         <div id="InfoContainer">
@@ -105,7 +106,7 @@ function AddHTMLDetail(currentPokemon, i) {
         </div>
         <div id="Result"></div>
     </div>`;
-    closeWindow();
+  closeWindow();
 }
 
 function removeDNone() {
@@ -120,8 +121,10 @@ function addDNone() {
 }
 
 function closeWindow() {
-  document.getElementById("pokeDetail").addEventListener("mouseup", function (event) {
-      let div = document.getElementById('pokeDetail');
+  document
+    .getElementById("pokeDetail")
+    .addEventListener("mouseup", function (event) {
+      let div = document.getElementById("pokeDetail");
       if (event.target == div) {
         addDNone();
       }
@@ -152,49 +155,43 @@ function setTypeBackground(typeName) {
   return typeColors[typeName] || typeColors.default;
 }
 
-async function nextPokemon(){
-  if(currentIndex >= AllPokemons.length){
+async function nextPokemon() {
+  if (currentIndex >= AllPokemons.length) {
     addDNone();
   }
-  if(currentIndex >= currentLoad){
+  if (currentIndex >= currentLoad) {
     await loadMore();
     nextPokemon();
-  }
-  else{
+  } else {
     currentIndex++;
     let NextPokemonUrl = AllPokemons[currentIndex].url;
-    let pokemon= await fetch(NextPokemonUrl);
+    let pokemon = await fetch(NextPokemonUrl);
     let NextPokemon = await pokemon.json();
-    document.getElementById('DetailCard').remove();
-    OpenDetailCard(NextPokemon, currentIndex)
+    document.getElementById("DetailCard").remove();
+    OpenDetailCard(NextPokemon, currentIndex);
   }
-  }
+}
 
-  async function backPokemon(){
-    document.getElementById('DetailCard').remove();
-    if(currentIndex <= 0){
-      addDNone();
-    }
-    else{
+async function backPokemon() {
+  document.getElementById("DetailCard").remove();
+  if (currentIndex <= 0) {
+    addDNone();
+  } else {
     currentIndex--;
     let NextPokemonUrl = AllPokemons[currentIndex].url;
-    let pokemon= await fetch(NextPokemonUrl);
+    let pokemon = await fetch(NextPokemonUrl);
     let NextPokemon = await pokemon.json();
-    OpenDetailCard(NextPokemon, currentIndex)
+    OpenDetailCard(NextPokemon, currentIndex);
   }
-  }
+}
 
-  function SearchPokemon(){
-    
-  }
-
-   async function showStats(){
-    let NextPokemonUrl = AllPokemons[currentIndex].url;
-    let pokemon= await fetch(NextPokemonUrl);
-    let currentPokemon = await pokemon.json();
-    let statcontainer = document.getElementById('Result');
-    statcontainer.innerHTML = ``;
-    statcontainer.innerHTML = `
+async function showStats() {
+  let NextPokemonUrl = AllPokemons[currentIndex].url;
+  let pokemon = await fetch(NextPokemonUrl);
+  let currentPokemon = await pokemon.json();
+  let statcontainer = document.getElementById("Result");
+  statcontainer.innerHTML = ``;
+  statcontainer.innerHTML = `
     <div class="HP">
     <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
     <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="${currentPokemon.stats["0"].base_stat}" aria-valuemin="0" aria-valuemax="200">
@@ -220,18 +217,18 @@ async function nextPokemon(){
     </div>
 </div>
     `;
-    document.getElementById('StatSpan').classList.add("Underline");
-    document.getElementById('MoveSpan').classList.remove("Underline");
-    document.getElementById('MeasurSpan').classList.remove("Underline");
-  }
+  document.getElementById("StatSpan").classList.add("Underline");
+  document.getElementById("MoveSpan").classList.remove("Underline");
+  document.getElementById("MeasurSpan").classList.remove("Underline");
+}
 
-  async function showMoves(){
-    let NextPokemonUrl = AllPokemons[currentIndex].url;
-    let pokemon= await fetch(NextPokemonUrl);
-    let currentPokemon = await pokemon.json();
-    let statcontainer = document.getElementById('Result');
-    statcontainer.innerHTML = ``;
-    statcontainer.innerHTML =`
+async function showMoves() {
+  let NextPokemonUrl = AllPokemons[currentIndex].url;
+  let pokemon = await fetch(NextPokemonUrl);
+  let currentPokemon = await pokemon.json();
+  let statcontainer = document.getElementById("Result");
+  statcontainer.innerHTML = ``;
+  statcontainer.innerHTML = `
     <div class="moves">
     <div>
     <div class="move">1. ${currentPokemon.moves["0"].move.name}</div>
@@ -243,20 +240,20 @@ async function nextPokemon(){
     <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
     </div>
     </div>`;
-    document.getElementById('StatSpan').classList.remove("Underline");
-    document.getElementById('MoveSpan').classList.add("Underline");
-    document.getElementById('MeasurSpan').classList.remove("Underline");
-  };
+  document.getElementById("StatSpan").classList.remove("Underline");
+  document.getElementById("MoveSpan").classList.add("Underline");
+  document.getElementById("MeasurSpan").classList.remove("Underline");
+}
 
- async function showBody(){
-    let NextPokemonUrl = AllPokemons[currentIndex].url;
-    let pokemon= await fetch(NextPokemonUrl);
-    let currentPokemon = await pokemon.json();
-    let statcontainer = document.getElementById('Result');
-    let height = currentPokemon.height / 10;
-    let weight = currentPokemon.weight / 10;
-    statcontainer.innerHTML = ``;
-    statcontainer.innerHTML =`
+async function showBody() {
+  let NextPokemonUrl = AllPokemons[currentIndex].url;
+  let pokemon = await fetch(NextPokemonUrl);
+  let currentPokemon = await pokemon.json();
+  let statcontainer = document.getElementById("Result");
+  let height = currentPokemon.height / 10;
+  let weight = currentPokemon.weight / 10;
+  statcontainer.innerHTML = ``;
+  statcontainer.innerHTML = `
     <div class="measur">
       <div class="height">
         <div>Height:</div><div>${height} m</div>
@@ -265,10 +262,8 @@ async function nextPokemon(){
         <div>Weight:</div><div>${weight} kg</div>
       </div>
     </div>
-   `; 
-   document.getElementById('StatSpan').classList.remove("Underline");
-   document.getElementById('MoveSpan').classList.remove("Underline");
-   document.getElementById('MeasurSpan').classList.add("Underline");
-  }
-
-
+   `;
+  document.getElementById("StatSpan").classList.remove("Underline");
+  document.getElementById("MoveSpan").classList.remove("Underline");
+  document.getElementById("MeasurSpan").classList.add("Underline");
+}
