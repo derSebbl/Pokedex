@@ -11,7 +11,7 @@ body {
 
 span:hover {
     cursor: pointer;
-    border-bottom: solid 3px blue;
+    border-bottom: solid 3px black;
 }
 
 .main-container{
@@ -94,15 +94,24 @@ span:hover {
 }
 
 #DetailCard img{
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
+}
+
+.btnimg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: inherit;
 }
 
 .DetailType{ 
-    border: solid 2px black;
-    border-radius: 20px;
-    background-color: beige;
-    padding: 5px;
+    border: solid 1px black;
+    background-color: #E9ECEF;
+    border-radius: 5px;
+    padding: 4px;
+    height: 35px;
+    text-align: center;
 }
 
 .d-none{
@@ -138,6 +147,9 @@ span:hover {
 .DName{
     font-size: 28px;
     font-weight: bold;
+    width: 300px;
+    display: flex;
+    justify-content: center;
 }
 
 .Bottom {
@@ -161,7 +173,6 @@ span:hover {
     display: flex;
     width: 100%;
     justify-content: flex-end;
-    margin-bottom: 20px;
 }
 
 #X {
@@ -174,9 +185,12 @@ span:hover {
 
 #back, #next {
     border: solid 2px black;
-    background-color: yellow;
+    background-color: #E9ECEF;
     font-weight: bold;
-    margin-left: 20px;
+    height: 45px;
+    margin-left: 8px;
+    margin-right: 8px;
+
 }
 
 #X:hover {
@@ -213,9 +227,11 @@ span:hover {
 }
 
 .move {
-    border-bottom: solid 1px black;
+    border: solid 1px black;
+    background-color: #E9ECEF;
     border-radius: 5px;
     margin-top: 15px;
+    padding: 8px;
 }
 
 .measur {
@@ -223,14 +239,38 @@ span:hover {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    font-size: 20px;
-    font-weight: bold; 
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .height, .weight {
     display: flex;
     gap: 20px;
+    border: solid 1px black;
+    background-color: #E9ECEF;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 15px;
 }
+
+.Underline {
+    border-bottom: solid 3px black;
+}
+
+*::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #444444;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #e8ecee;
+    border-radius: 20px;
+    border: 2px inset #ffffff;
+  }
+
 
 @media (max-width: 500px){
     #DetailCard, #Result{
@@ -251,5 +291,9 @@ span:hover {
 
     .header img{
         width: 300px;
+    }
+
+    .DName{
+        font-weight: normal;
     }
 }

@@ -85,17 +85,23 @@ function AddHTMLDetail(currentPokemon, i) {
   container.innerHTML += /*html*/`
       <div id="DetailCard" style="background-color: ${backgroundColor};">
           <div id="DetailBtn">
-           <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
-           <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
+           
+           
            <button type="button" class="btn btn-warning" id="X" onclick="addDNone()">x</button>
           </div>
-        <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
-        <div class="DName">${currentPokemon.name}</div>
+          <div>
+            <img src="${currentPokemon.sprites.other["official-artwork"].front_default}">
+         </div>
+         <div class="btnimg">
+           <button type="button" class="btn btn-warning" id="back" onclick="backPokemon()"><<<</button>
+          <div class="DName">${currentPokemon.name}</div>
+        <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
+        </div>
         <div class="DetailType">type: ${type}</div>
         <div id="InfoContainer">
-          <div><span onclick="showStats()">Stats</span></div>
-          <div><span onclick="showMoves()">Moves</span></div>
-          <div><span onclick="showBody()">Measurements</span></div>
+          <div><span id="StatSpan" onclick="showStats()">Stats</span></div>
+          <div><span id="MoveSpan"onclick="showMoves()">Moves</span></div>
+          <div><span id="MeasurSpan"onclick="showBody()">Measurements</span></div>
         </div>
         <div id="Result"></div>
     </div>`;
@@ -214,6 +220,9 @@ async function nextPokemon(){
     </div>
 </div>
     `;
+    document.getElementById('StatSpan').classList.add("Underline");
+    document.getElementById('MoveSpan').classList.remove("Underline");
+    document.getElementById('MeasurSpan').classList.remove("Underline");
   }
 
   async function showMoves(){
@@ -234,6 +243,9 @@ async function nextPokemon(){
     <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
     </div>
     </div>`;
+    document.getElementById('StatSpan').classList.remove("Underline");
+    document.getElementById('MoveSpan').classList.add("Underline");
+    document.getElementById('MeasurSpan').classList.remove("Underline");
   };
 
  async function showBody(){
@@ -254,6 +266,9 @@ async function nextPokemon(){
       </div>
     </div>
    `; 
+   document.getElementById('StatSpan').classList.remove("Underline");
+   document.getElementById('MoveSpan').classList.remove("Underline");
+   document.getElementById('MeasurSpan').classList.add("Underline");
   }
 
 
