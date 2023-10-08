@@ -165,6 +165,7 @@ span:hover {
   width: 150px;
   height: 50px;
   font-size: 24px;
+  background-color: #E6DBBF;
 }
 
 #More:hover {
@@ -179,7 +180,7 @@ span:hover {
 
 #X {
   border: solid 2px black;
-  background-color: red;
+  background-color: #DC3545;
   font-weight: bold;
   margin-right: 20px;
   margin-left: 80px;

@@ -28,10 +28,11 @@ const typeColors = {
 
 let currentIndex = 0;
 
-function loadMore() {
+async function loadMore() {
   load += 20;
-  loadPokemon();
   DisableBtn();
+  await loadPokemon();
+  EnableBtn();
 }
 
 async function AddPokemon() {
@@ -109,52 +110,6 @@ function AddHTMLDetail(currentPokemon, i) {
   closeWindow();
 }
 
-function removeDNone() {
-  document.getElementById("pokeDetail").classList.remove("d-none");
-}
-
-function addDNone() {
-  let container = document.getElementById("pokeDetail");
-  container.classList.add("d-none");
-  container.innerHTML = ``;
-  BtnRemoveDnone();
-}
-
-function closeWindow() {
-  document
-    .getElementById("pokeDetail")
-    .addEventListener("mouseup", function (event) {
-      let div = document.getElementById("pokeDetail");
-      if (event.target == div) {
-        addDNone();
-      }
-    });
-  BtnRemoveDnone();
-}
-
-function BackToTop() {
-  document.documentElement.scrollTop = 0;
-}
-
-function DisableBtn() {
-  document.getElementById("More").disabled = true;
-  setTimeout(function () {
-    document.getElementById("More").disabled = false;
-  }, 4000);
-}
-
-function BtnAddDnone() {
-  document.getElementById("Top").classList.add("d-none");
-}
-
-function BtnRemoveDnone() {
-  document.getElementById("Top").classList.remove("d-none");
-}
-
-function setTypeBackground(typeName) {
-  return typeColors[typeName] || typeColors.default;
-}
-
 async function nextPokemon() {
   if (currentIndex >= AllPokemons.length) {
     addDNone();
@@ -189,8 +144,64 @@ async function showStats() {
   let NextPokemonUrl = AllPokemons[currentIndex].url;
   let pokemon = await fetch(NextPokemonUrl);
   let currentPokemon = await pokemon.json();
+  renderStatsTemplates(currentPokemon);
+}
+
+async function showMoves() {
+  let NextPokemonUrl = AllPokemons[currentIndex].url;
+  let pokemon = await fetch(NextPokemonUrl);
+  let currentPokemon = await pokemon.json();
+  renderMovesTemplates (currentPokemon);
+}
+
+async function showBody() {
+  let NextPokemonUrl = AllPokemons[currentIndex].url;
+  let pokemon = await fetch(NextPokemonUrl);
+  let currentPokemon = await pokemon.json();
+renderMeasurementsTemplate(currentPokemon);
+}
+
+
+function renderMeasurementsTemplate(currentPokemon){
   let statcontainer = document.getElementById("Result");
-  statcontainer.innerHTML = ``;
+  let height = currentPokemon.height / 10;
+  let weight = currentPokemon.weight / 10;
+  statcontainer.innerHTML = `
+    <div class="measur">
+      <div class="height">
+        <div>Height:</div><div>${height} m</div>
+      </div>
+      <div class="weight">
+        <div>Weight:</div><div>${weight} kg</div>
+      </div>
+    </div>
+   `;
+  document.getElementById("StatSpan").classList.remove("Underline");
+  document.getElementById("MoveSpan").classList.remove("Underline");
+  document.getElementById("MeasurSpan").classList.add("Underline");
+}
+
+function renderMovesTemplates (currentPokemon){
+  let statcontainer = document.getElementById("Result");
+  statcontainer.innerHTML = `
+    <div class="moves">
+    <div>
+    <div class="move">1. ${currentPokemon.moves["0"].move.name}</div>
+    <div class="move">3. ${currentPokemon.moves["2"].move.name}</div>
+    </div>
+    <br>
+    <div>
+    <div class="move">2. ${currentPokemon.moves["1"].move.name}</div>
+    <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
+    </div>
+    </div>`;
+  document.getElementById("StatSpan").classList.remove("Underline");
+  document.getElementById("MoveSpan").classList.add("Underline");
+  document.getElementById("MeasurSpan").classList.remove("Underline");
+}
+
+function renderStatsTemplates(currentPokemon) {
+  let statcontainer = document.getElementById("Result");
   statcontainer.innerHTML = `
     <div class="HP">
     <div class="StatArt">${currentPokemon.stats["0"].stat.name}:</div>
@@ -222,48 +233,49 @@ async function showStats() {
   document.getElementById("MeasurSpan").classList.remove("Underline");
 }
 
-async function showMoves() {
-  let NextPokemonUrl = AllPokemons[currentIndex].url;
-  let pokemon = await fetch(NextPokemonUrl);
-  let currentPokemon = await pokemon.json();
-  let statcontainer = document.getElementById("Result");
-  statcontainer.innerHTML = ``;
-  statcontainer.innerHTML = `
-    <div class="moves">
-    <div>
-    <div class="move">1. ${currentPokemon.moves["0"].move.name}</div>
-    <div class="move">3. ${currentPokemon.moves["2"].move.name}</div>
-    </div>
-    <br>
-    <div>
-    <div class="move">2. ${currentPokemon.moves["1"].move.name}</div>
-    <div class="move">4. ${currentPokemon.moves["3"].move.name}</div>
-    </div>
-    </div>`;
-  document.getElementById("StatSpan").classList.remove("Underline");
-  document.getElementById("MoveSpan").classList.add("Underline");
-  document.getElementById("MeasurSpan").classList.remove("Underline");
+function removeDNone() {
+  document.getElementById("pokeDetail").classList.remove("d-none");
 }
 
-async function showBody() {
-  let NextPokemonUrl = AllPokemons[currentIndex].url;
-  let pokemon = await fetch(NextPokemonUrl);
-  let currentPokemon = await pokemon.json();
-  let statcontainer = document.getElementById("Result");
-  let height = currentPokemon.height / 10;
-  let weight = currentPokemon.weight / 10;
-  statcontainer.innerHTML = ``;
-  statcontainer.innerHTML = `
-    <div class="measur">
-      <div class="height">
-        <div>Height:</div><div>${height} m</div>
-      </div>
-      <div class="weight">
-        <div>Weight:</div><div>${weight} kg</div>
-      </div>
-    </div>
-   `;
-  document.getElementById("StatSpan").classList.remove("Underline");
-  document.getElementById("MoveSpan").classList.remove("Underline");
-  document.getElementById("MeasurSpan").classList.add("Underline");
+function addDNone() {
+  let container = document.getElementById("pokeDetail");
+  container.classList.add("d-none");
+  container.innerHTML = ``;
+  BtnRemoveDnone();
+}
+
+function closeWindow() {
+  document
+    .getElementById("pokeDetail")
+    .addEventListener("mouseup", function (event) {
+      let div = document.getElementById("pokeDetail");
+      if (event.target == div) {
+        addDNone();
+      }
+    });
+  BtnRemoveDnone();
+}
+
+function BackToTop() {
+  document.documentElement.scrollTop = 0;
+}
+
+function DisableBtn() {
+  document.getElementById("More").disabled = true;
+}
+
+function EnableBtn() {
+  document.getElementById("More").disabled = false;
+}
+
+function BtnAddDnone() {
+  document.getElementById("Top").classList.add("d-none");
+}
+
+function BtnRemoveDnone() {
+  document.getElementById("Top").classList.remove("d-none");
+}
+
+function setTypeBackground(typeName) {
+  return typeColors[typeName] || typeColors.default;
 }
