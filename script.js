@@ -77,15 +77,26 @@ function renderPokedex(currentPokemon, i) {
 function OpenDetailCard(currentPokemon, i) {
   currentIndex = i;
   removeDNone();
-  AddHTMLDetail(currentPokemon, i);
+  renderDetailCardTemplate(currentPokemon, i);
   showStats(currentPokemon);
-  BtnAddDnone();
 }
 
-function AddHTMLDetail(currentPokemon, i) {
+function renderDetailCardTemplate(currentPokemon, i) {
   let container = document.getElementById("pokeDetail");
-  let type = currentPokemon.types["0"].type.name;
-  let backgroundColor = setTypeBackground(type);
+  const type = currentPokemon.types.map((type) => type.type.name);
+  let backgroundColor = setTypeBackground(type[0]);
+  if (type[1]) {
+    typeSection = `
+      <div class="typeContainer">
+        <div id ="type1" class="DetailType">${type[0]}</div>
+        <div id ="type2" class="DetailType">${type[1]}</div>
+      </div>`;
+  } else {
+    typeSection = `
+      <div class="typeContainer">
+        <div id ="type1" class="DetailType">${type[0]}</div>
+      </div>`;
+  }
   container.innerHTML += /*html*/ `
     <div id="DetailCard" style="background-color: ${backgroundColor};">
         <div id="DetailBtn">
@@ -99,7 +110,7 @@ function AddHTMLDetail(currentPokemon, i) {
           <div class="DName">${currentPokemon.name}</div>
           <button type="button" class="btn btn-warning" id="next" onclick="nextPokemon()">>>></button>
         </div>
-        <div class="DetailType">type: ${type}</div>
+          ${typeSection}
         <div id="InfoContainer">
           <div><span id="StatSpan" onclick="showStats()">Stats</span></div>
           <div><span id="MoveSpan"onclick="showMoves()">Moves</span></div>
@@ -241,7 +252,6 @@ function addDNone() {
   let container = document.getElementById("pokeDetail");
   container.classList.add("d-none");
   container.innerHTML = ``;
-  BtnRemoveDnone();
 }
 
 function closeWindow() {
@@ -253,7 +263,6 @@ function closeWindow() {
         addDNone();
       }
     });
-  BtnRemoveDnone();
 }
 
 function BackToTop() {
@@ -266,14 +275,6 @@ function DisableBtn() {
 
 function EnableBtn() {
   document.getElementById("More").disabled = false;
-}
-
-function BtnAddDnone() {
-  document.getElementById("Top").classList.add("d-none");
-}
-
-function BtnRemoveDnone() {
-  document.getElementById("Top").classList.remove("d-none");
 }
 
 function setTypeBackground(typeName) {

@@ -113,6 +113,13 @@ span:hover {
   text-align: center;
 }
 
+.typeContainer {
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .d-none {
   display: none !important;
 }
@@ -166,6 +173,7 @@ span:hover {
   height: 50px;
   font-size: 24px;
   background-color: #E6DBBF;
+  border: solid black;
 }
 
 #More:hover {
