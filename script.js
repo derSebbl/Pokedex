@@ -280,3 +280,28 @@ function EnableBtn() {
 function setTypeBackground(typeName) {
   return typeColors[typeName] || typeColors.default;
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+// Zugriff auf das Suchfeld
+let searchbar = document.getElementById('searchbar');
+
+// Event-Listener hinzufügen
+searchbar.addEventListener('keyup', function(e) {
+  let searchString = e.target.value.toLowerCase();
+
+  // Zugriff auf alle Pokemon-Karten
+  let allPokemonCards = document.getElementsByClassName('pokecard');
+
+  // Durchlaufen Sie alle Pokemon-Karten und verstecken Sie diejenigen, die nicht übereinstimmen
+  for(let i = 0; i < allPokemonCards.length; i++) {
+    let pokemonNameElement = allPokemonCards[i].getElementsByClassName('pokeName')[0];
+    let pokemonName = pokemonNameElement.innerText.toLowerCase();
+    if(pokemonName.includes(searchString)) {
+      allPokemonCards[i].style.display = '';
+    } else {
+      allPokemonCards[i].style.display = 'none';
+    }
+  }
+});
+});

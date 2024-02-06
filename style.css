@@ -27,6 +27,15 @@ span:hover {
   justify-content: center;
 }
 
+#searchbar {
+  height: 40px;
+  width: 240px;
+  position: absolute;
+  right: 20%;
+  border-radius: 25px;
+  top: 70px;
+}
+
 #pokedex {
   display: flex;
   flex-wrap: wrap;
@@ -52,6 +61,11 @@ span:hover {
 .pokecard:hover {
   background-color: rgba(255, 235, 170, 1);
   cursor: pointer;
+}
+
+.pokecard:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .pokecard img {
