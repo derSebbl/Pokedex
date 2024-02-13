@@ -25,15 +25,14 @@ span:hover {
 .header {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #searchbar {
   height: 40px;
   width: 240px;
-  position: absolute;
-  right: 20%;
   border-radius: 25px;
-  top: 70px;
 }
 
 #pokedex {
@@ -66,6 +65,8 @@ span:hover {
 .pokecard:hover img {
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .pokecard img {
@@ -104,11 +105,13 @@ span:hover {
   border: hidden;
   position: fixed;
   top: 10%;
+  z-index: 10;
 }
 
 #DetailCard img {
   height: 200px;
   width: 200px;
+  z-index: 100;
 }
 
 .btnimg {
