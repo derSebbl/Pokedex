@@ -55,16 +55,17 @@ span:hover {
   width: 200px;
   margin: 10px;
   background-color: rgba(255, 235, 205, 0.9);
+  transition: transform 0.3s ease-in-out;
 }
 
 .pokecard:hover {
   background-color: rgba(255, 235, 170, 1);
   cursor: pointer;
+  transform: scale(1.1);
 }
 
 .pokecard:hover img {
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
+  transform: scale(1.2);
   z-index: 1;
   pointer-events: none;
 }
@@ -72,6 +73,9 @@ span:hover {
 .pokecard img {
   height: 150px;
   width: 150px;
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .cardHead {
@@ -91,6 +95,7 @@ span:hover {
   left: 0;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 #DetailCard {
@@ -105,7 +110,6 @@ span:hover {
   border: hidden;
   position: fixed;
   top: 10%;
-  z-index: 10;
 }
 
 #DetailCard img {
