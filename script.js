@@ -280,7 +280,7 @@ function EnableBtn() {
 function setTypeBackground(typeName) {
   return typeColors[typeName] || typeColors.default;
 }
-
+//sdsdsdsd
 
 document.addEventListener('DOMContentLoaded', function() {
 // Zugriff auf das Suchfeld
